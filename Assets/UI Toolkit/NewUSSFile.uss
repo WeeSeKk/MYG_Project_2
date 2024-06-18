@@ -1,0 +1,34 @@
+VisualElement {
+}
+
+Label {
+    font-size: 76px;
+    -unity-text-align: upper-center;
+    text-overflow: clip;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-self: stretch;
+    visibility: visible;
+    overflow: visible;
+    position: relative;
+    white-space: normal;
+    -unity-font: url("project://database/Assets/Gentleland/SteampunkUI/Fonts/LiberationSans/LiberationSans.ttf?fileID=12800000&guid=7814085ededf13f408a6672ae55327a1&type=3#LiberationSans");
+}
+
+TextElement {
+    background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Slots_Arrows.png?fileID=-4972393294115483615&guid=4d6d3e529a32a4141bbac8264745777d&type=3#Steampunk_UI_Slots_Arrows_8");
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.unity-text-field__input {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Slots_Arrows.png?fileID=4508516164457878799&guid=4d6d3e529a32a4141bbac8264745777d&type=3#Steampunk_UI_Slots_Arrows_9");
+    padding-top: -34%;
+    padding-right: -58px;
+    padding-bottom: -57px;
+    padding-left: -54px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}

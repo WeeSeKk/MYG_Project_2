@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/NewUSSFile.uss?fileID=7433441132597879392&amp;guid=c6d36846cbdae65468bfa2b802b185e7&amp;type=3#NewUSSFile" />
+    <ui:VisualElement name="Background" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Gentleland/SteampunkUI/Art/BackGround.png?fileID=21300000&amp;guid=b464ee8350ce3984aa31ea54d12d9236&amp;type=3#BackGround&quot;);">
+        <ui:VisualElement name="BottomLeftGear" style="flex-grow: 1; position: absolute; background-image: url(&quot;project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Alternative_Colors_4.png?fileID=-8831441479830076655&amp;guid=fc2c96f1421fbe54e82922ae89afef74&amp;type=3#Steampunk_UI_Alternative_Colors_4_6&quot;); width: 393px; height: 183px; top: 2122px; left: 440px; -unity-background-scale-mode: stretch-to-fill;" />
+        <ui:VisualElement name="BottomRightGear" style="flex-grow: 1; position: absolute; background-image: url(&quot;project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Alternative_Colors_4.png?fileID=-8831441479830076655&amp;guid=fc2c96f1421fbe54e82922ae89afef74&amp;type=3#Steampunk_UI_Alternative_Colors_4_6&quot;); width: 293px; height: 121px; top: 2131px; left: 794px; -unity-background-scale-mode: stretch-to-fill; align-items: stretch; rotate: -51deg;" />
+        <ui:VisualElement name="Frame" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Frames_3.png?fileID=113947384412704010&amp;guid=c3cbd015370c5294385a8d880c234850&amp;type=3#Steampunk_UI_Frames_3_4&quot;); -unity-slice-scale: 2.5px;">
+            <ui:VisualElement name="LeftTopFrame" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Frames_3.png?fileID=-595620182695351188&amp;guid=c3cbd015370c5294385a8d880c234850&amp;type=3#Steampunk_UI_Frames_3_5&quot;); margin-top: 7px; margin-right: 538px; margin-bottom: 2076px; margin-left: 0; opacity: 1; display: flex; visibility: visible; align-items: stretch; justify-content: space-between; height: -1707px; width: -61px; flex-direction: row; align-self: stretch;">
+                <ui:VisualElement name="RightTopFrame" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Frames_3.png?fileID=5654969685363657340&amp;guid=c3cbd015370c5294385a8d880c234850&amp;type=3#Steampunk_UI_Frames_3_6&quot;); margin-right: -540px; margin-left: 540px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="BottomLeftFrame" style="flex-grow: 1; position: absolute; background-image: url(&quot;project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Frames_3.png?fileID=4864721600614679434&amp;guid=c3cbd015370c5294385a8d880c234850&amp;type=3#Steampunk_UI_Frames_3_7&quot;); width: 50%; height: 664px; top: 1712px; left: 0;" />
+        <ui:VisualElement name="TextInput" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
+            <ui:VisualElement name="TopTextField" style="flex-grow: 1; position: absolute; width: 824px; height: 229px; top: 638px; left: 133px;">
+                <ui:TextField picking-mode="Ignore" label="Text Field" value="filler text" name="TextField" style="height: 249px; width: 803px; left: auto; background-image: none; align-items: center; flex-direction: column; justify-content: center;" />
+                <ui:VisualElement name="TopTextField" style="flex-grow: 1; position: absolute; width: 824px; height: 229px; top: 300%; left: 0;">
+                    <ui:TextField picking-mode="Ignore" label="Text Field" value="filler text" style="height: 249px; width: 803px; left: auto; background-image: none; align-items: center; flex-direction: column; justify-content: center;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
