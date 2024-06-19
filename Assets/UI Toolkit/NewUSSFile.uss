@@ -18,6 +18,7 @@ Label {
     -unity-text-outline-width: 4px;
     opacity: 1;
     -unity-text-outline-color: rgb(0, 0, 0);
+    text-shadow: 5px 5px 0 rgb(0, 0, 0);
 }
 
 TextElement {
