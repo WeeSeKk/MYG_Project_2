@@ -33,7 +33,7 @@ public class UITest
         using (var clicked = new NavigationSubmitEvent {target = button})
             button.SendEvent(clicked);
 
-        Assert.IsTrue(label.text == "password and email error");
+        Assert.IsTrue(label.text == "password & email invalid");
     }
 
     [UnityTest]
@@ -56,7 +56,7 @@ public class UITest
         using (var clicked = new NavigationSubmitEvent {target = button})
             button.SendEvent(clicked);
 
-        Assert.IsTrue(label.text == "email error");
+        Assert.IsTrue(label.text == "email invalid");
     }
 
     [UnityTest]
@@ -78,8 +78,8 @@ public class UITest
 
         using (var clicked = new NavigationSubmitEvent {target = button})
             button.SendEvent(clicked);
-
-        Assert.IsTrue(label.text == "password error");
+            
+        Assert.IsTrue(label.text == "password invalid");
     }
 
     [UnityTest]
