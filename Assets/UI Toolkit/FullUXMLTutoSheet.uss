@@ -1,0 +1,38 @@
+VisualElement.root {
+    width: 100%;
+    height: 100%;
+}
+
+VisualElement.container {
+    background-color: #ffffff;
+}
+
+Label.labelsettings{
+    align-self: center;
+    max-width: 100px;
+    -unity-text-outline-width: 0px;
+}
+
+VisualElement.sliderholder {
+    bottom: -150px
+}
+
+Slider.audioslider{
+    max-width: 500px;
+    min-width: 200px;
+    align-self: center;
+}
+
+Toggle.mutetoggle{
+    position: absolute;
+    max-width: 50px;
+    min-width: 30px;
+}
+
+Button.closebutton{
+    width: 8%;
+    height: 8%;
+    align-self: left;
+    bottom: 65%;
+    right: -90%;
+}

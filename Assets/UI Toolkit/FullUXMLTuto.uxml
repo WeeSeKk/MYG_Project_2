@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
+>
+    <Style src="FullUXMLTutoSheet.uss" />
+    <VisualElement name="root">
+        <VisualElement name="background" class="container" style="justify-content: flex-start; align-self: auto; align-items: stretch;">
+            <Label text="Settings" class="labelsettings" />
+            <VisualElement name="sliderholder" class="sliderholder">
+                <Slider name="audioslider" class="audioslider" />    
+                <Toggle name="mutetoggle" class ="mutetoggle" />  
+            </VisualElement>
+            <Button name="closebutton" class ="closebutton" />      
+        </VisualElement>
+    </VisualElement>
+
+
+
+</UXML>

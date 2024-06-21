@@ -2,16 +2,16 @@ VisualElement {
 }
 
 Label {
-    font-size: 76px;
+    font-size: 53px;
     -unity-text-align: upper-center;
     text-overflow: clip;
-    align-items: stretch;
+    align-items: auto;
     justify-content: flex-start;
     align-self: stretch;
     visibility: visible;
     overflow: visible;
     position: relative;
-    white-space: normal;
+    white-space: nowrap;
     -unity-font: url("project://database/Assets/Gentleland/SteampunkUI/Fonts/LiberationSans/LiberationSans.ttf?fileID=12800000&guid=7814085ededf13f408a6672ae55327a1&type=3#LiberationSans");
     -unity-font-style: bold;
     color: rgb(140, 95, 49);
@@ -19,6 +19,7 @@ Label {
     opacity: 1;
     -unity-text-outline-color: rgb(0, 0, 0);
     text-shadow: 5px 5px 0 rgb(0, 0, 0);
+    flex-direction: column;
 }
 
 TextElement {
@@ -217,4 +218,108 @@ TextElement {
 
 .tabOut {
     scale: 0 0;
+}
+
+.frameDefault {
+    flex-grow: 1;
+    background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Frames_3.png?fileID=113947384412704010&guid=c3cbd015370c5294385a8d880c234850&type=3#Steampunk_UI_Frames_3_4");
+    -unity-slice-scale: 2.5px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    visibility: visible;
+    overflow: hidden;
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.woodFrameDefault {
+    flex-grow: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 4%;
+    background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/BackGround.png?fileID=21300000&guid=b464ee8350ce3984aa31ea54d12d9236&type=3#BackGround");
+    display: flex;
+    visibility: visible;
+    overflow: visible;
+    opacity: 1;
+}
+
+.woodFrameHidden {
+    left: 100%;
+    top: 0;
+    right: -100%;
+}
+
+.loginWoodFramHidden {
+    transition-duration: 1s;
+    display: flex;
+    left: 200%;
+    right: -200%;
+}
+
+.transitionWoodFramDefault {
+    transition-duration: 1s;
+    left: 100%;
+    top: 0;
+    right: -100%;
+}
+
+.transitionWoodFrameHidden {
+    left: -100%;
+    right: 100%;
+}
+
+.registerWoodFrameHidden {
+    transition-duration: 1s;
+    display: flex;
+    left: -200%;
+    right: 200%;
+}
+
+.GearDefault {
+    flex-grow: 1;
+    position: absolute;
+    background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Buttons_1.png?fileID=-4374215236208778123&guid=9291b39306d4ce640bf255c16c6ddf5b&type=3#Steampunk_UI_Buttons_1_15");
+    width: 40%;
+    height: 10%;
+    top: 87%;
+    left: 35%;
+    -unity-background-scale-mode: scale-to-fit;
+    align-items: auto;
+    min-width: 45%;
+    min-height: 11%;
+    max-width: 80%;
+    max-height: 20%;
+    justify-content: flex-start;
+    align-self: auto;
+    right: 15%;
+    bottom: 127px;
+    -unity-background-image-tint-color: rgb(190, 137, 137);
+}
+
+.GearRotate {
+    rotate: 360deg;
+}
+
+.Gear2Default {
+    flex-grow: 1;
+    background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Frames_3.png?fileID=-595620182695351188&guid=c3cbd015370c5294385a8d880c234850&type=3#Steampunk_UI_Frames_3_5");
+    opacity: 1;
+    display: flex;
+    visibility: visible;
+    align-items: stretch;
+    justify-content: space-between;
+    height: 15%;
+    width: 50%;
+    flex-direction: row;
+    align-self: stretch;
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    top: 0;
+    left: 0;
 }
