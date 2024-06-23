@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -74,7 +76,7 @@ public class UIManager : MonoBehaviour
         switch (emailValid, passwordValid)
         {
             case (false, true):
-                errorBoxLabel.text = "email invalid";
+                errorBoxLabel.text = "email unknown";
                 errorBox.RemoveFromClassList("errorBoxUp");
                 yield return new WaitForSeconds(2f);
                 break;
@@ -99,11 +101,17 @@ public class UIManager : MonoBehaviour
         errorBox.AddToClassList("errorBoxUp");
     }
 
+    bool IsEmailValid(string email)
+    {
+        const string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov|fr)$";
+        return Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
+    }
+
     IEnumerator OnRegisterButtonClicked(ClickEvent evt)
     {
         errorBox.AddToClassList("errorBoxUp");
 
-        bool newemailValid = newEmailTextField.text.Length > 0;//await new system
+        bool newemailValid = IsEmailValid(newEmailTextField.text);
         bool newpasswordValid = newPasswordTextField.text.Length >= 6;
         bool confnewpassowrd = confPasswordTextField.text == newPasswordTextField.text;
 
