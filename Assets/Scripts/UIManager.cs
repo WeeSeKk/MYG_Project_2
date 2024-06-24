@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,11 +6,16 @@ using System.Net.Mail;
 using System.Text.RegularExpressions;
 using DG.Tweening;
 using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Photon.Pun;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviourPunCallbacks
 {
+    [SerializeField] VisualTreeAsset elementList;
+    [SerializeField] UIDocument loggedMenu;
+    ListView list;
     VisualElement root;
     VisualElement tab;
     VisualElement gear0;
@@ -32,6 +36,7 @@ public class UIManager : MonoBehaviour
     Label errorBoxLabel;
     List<string> emails;
     List<string> passwords;
+    List<int> loggedCount = new List<int>();
     
     void Start()
     {
@@ -39,6 +44,7 @@ public class UIManager : MonoBehaviour
         passwords = new List<string> { "admin"};
 
         root = GetComponent<UIDocument>().rootVisualElement;
+        list = root.Q<ListView>("loggedlist");
         emailTextField = root.Q<TextField>("EmailTextField");
         passwordTextField = root.Q<TextField>("PasswordTextField");
         button = root.Q<Button>("LoginButton");
@@ -165,5 +171,27 @@ public class UIManager : MonoBehaviour
         gear1.AddToClassList("GearRotate");
         gear2.AddToClassList("GearRotate");
         loginFrame.RemoveFromClassList("loginWoodFramHidden");
+    }
+
+    [PunRPC]
+    void AddList()
+    {
+        loggedCount.Add(loggedCount.Count);
+
+        list.Clear();
+
+        list.makeItem = () =>  elementList.CloneTree();
+        list.itemsSource = loggedCount;
+        list.bindItem = (root, i) =>
+        {
+            root.Q<Label>().text = i.ToString() + " Hello World";
+        };
+        list.fixedItemHeight = 60;
+        list.Rebuild();
+    }
+
+    public override void OnJoinedRoom()
+    {
+        photonView.RPC("AddList", RpcTarget.All);
     }
 }

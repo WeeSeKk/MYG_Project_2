@@ -280,6 +280,24 @@ TextElement {
     right: 200%;
 }
 
+.connectionlist { 
+    position: absolute;
+    display: flex;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: #ff0000;
+}
+
+.loggedlist {
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+}
+
 .GearDefault {
     flex-grow: 1;
     position: absolute;
