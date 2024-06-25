@@ -289,13 +289,127 @@ TextElement {
     bottom: 0%;
     width: 100%;
     height: 100%;
-    background-color: #ff0000;
+    background-color: #000000;
 }
 
 .loggedlist {
     align-items: stretch;
     width: 100%;
     height: 100%;
+}
+
+.disconnectbutton{
+    position: absolute;
+    align-self: center;
+    background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Alternative_Colors_3.png?fileID=-1296462821805125758&guid=0bfe7a2d4a8de314bbf0f670d78a6cd2&type=3#Steampunk_UI_Alternative_Colors_3_0");
+    font-size: 50px;
+    display: flex;
+    background-color: rgba(255,255,255,0);
+    border-color: rgba(255,255,255,0);
+    width: 40%;
+    height: 5%;
+    bottom: -6%;
+    transition-duration: 3s;
+    color: rgb(139, 95, 49);
+    -unity-font-style: bold;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(149, 149, 149, 0);
+    border-right-color: rgba(149, 149, 149, 0);
+    border-top-color: rgba(149, 149, 149, 0);
+    border-bottom-color: rgba(149, 149, 149, 0);
+    -unity-text-outline-color: rgb(0, 0, 0);
+    -unity-text-outline-width: 3px;
+    text-shadow: 5px 5px 0 rgb(0, 0, 0);
+}
+
+.disconnectbuttonup{
+    position: absolute;
+    align-self: center;
+    background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Alternative_Colors_3.png?fileID=-1296462821805125758&guid=0bfe7a2d4a8de314bbf0f670d78a6cd2&type=3#Steampunk_UI_Alternative_Colors_3_0");
+    font-size: 50px;
+    display: flex;
+    background-color: rgba(255,255,255,0);
+    border-color: rgba(255,255,255,0);
+    width: 40%;
+    height: 5%;
+    bottom: 0%;
+    transition-duration: 0.5s;
+    color: rgb(139, 95, 49);
+    -unity-font-style: bold;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(149, 149, 149, 0);
+    border-right-color: rgba(149, 149, 149, 0);
+    border-top-color: rgba(149, 149, 149, 0);
+    border-bottom-color: rgba(149, 149, 149, 0);
+    -unity-text-outline-color: rgb(0, 0, 0);
+    -unity-text-outline-width: 3px;
+    text-shadow: 5px 5px 0 rgb(0, 0, 0);
+}
+
+.disconnectbutton:hover{
+    position: absolute;
+    align-self: center;
+    background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Alternative_Colors_3.png?fileID=-1296462821805125758&guid=0bfe7a2d4a8de314bbf0f670d78a6cd2&type=3#Steampunk_UI_Alternative_Colors_3_0");
+    font-size: 50px;
+    display: flex;
+    background-color: rgba(255,255,255,0);
+    border-color: rgba(255,255,255,0);
+    width: 40%;
+    height: 5%;
+    bottom: 0%;
+    scale: 1.1 1.1;
+    transition-duration: 0.5s;
+    color: rgb(139, 95, 49);
+    -unity-font-style: bold;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(149, 149, 149, 0);
+    border-right-color: rgba(149, 149, 149, 0);
+    border-top-color: rgba(149, 149, 149, 0);
+    border-bottom-color: rgba(149, 149, 149, 0);
+    -unity-text-outline-color: rgb(0, 0, 0);
+    -unity-text-outline-width: 3px;
+    text-shadow: 5px 5px 0 rgb(0, 0, 0);
+}
+
+.disconnectbutton:active{
+    position: absolute;
+    align-self: center;
+    background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Alternative_Colors_3.png?fileID=-1296462821805125758&guid=0bfe7a2d4a8de314bbf0f670d78a6cd2&type=3#Steampunk_UI_Alternative_Colors_3_0");
+    font-size: 50px;
+    display: flex;
+    background-color: rgba(255,255,255,0);
+    border-color: rgba(255,255,255,0);
+    width: 40%;
+    height: 5%;
+    bottom: 0%;
+    scale: 1 1;
+}
+
+.logginbox{
+    position: absolute;
+    display: flex;
+    left:13%;
+    right: 0%;
+    top: -15%;
+    bottom: 0%;
+    width: 75%;
+    height: 15%;
+}
+
+.logginboxdown{ 
+    position: absolute;
+    display: flex;
+    left:13%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    width: 75%;
+    height: 15%;
+}
+
+.logginboxlabel{
+    align-self: center;
+    bottom: -40%;
 }
 
 .GearDefault {
