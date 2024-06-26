@@ -28,8 +28,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    public void Disconnect(ClickEvent evt)
+    public void Disconnect()
     {
+        uIManager.loggedCount.Clear();
         PhotonNetwork.Disconnect();
         Debug.Log("disconnected");
         StartCoroutine(uIManager.LogginStatusBox("Disconnected"));

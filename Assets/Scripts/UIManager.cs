@@ -14,9 +14,10 @@ public class UIManager : MonoBehaviourPunCallbacks
     [SerializeField] VisualTreeAsset elementList;
     [SerializeField] UIDocument loggedMenu;
     [SerializeField] NetworkManager networkManager;
-    ListView list;
+    public ListView list;
     VisualElement root;
     VisualElement loginBox;
+    VisualElement nicknameHolder;
     VisualElement tab;
     VisualElement gear0;
     VisualElement gear1;
@@ -26,34 +27,38 @@ public class UIManager : MonoBehaviourPunCallbacks
     VisualElement loginFrame;
     VisualElement frame;
     VisualElement errorBox;
-    Label loginBoxLabel;
     TextField passwordTextField;
     TextField newPasswordTextField;
     TextField confPasswordTextField;
     TextField emailTextField;
     TextField newEmailTextField;
+    TextField nicknameTextField;
     Button button;
+    Button nicknameButton;
     Button disconnectButton;
     Button skipButton;
     Button registButton;
     Label errorBoxLabel;
+    Label loginBoxLabel;
     List<string> emails;
     List<string> passwords;
-    List<int> loggedCount = new List<int>();
+    public List<int> loggedCount = new List<int>();
     
     void Start()
     {
-        emails = new List<string> { "admin"};
-        passwords = new List<string> { "admin"};
+        emails = new List<string> {"admin"};
+        passwords = new List<string> {"admin"};
 
         root = GetComponent<UIDocument>().rootVisualElement;
         list = root.Q<ListView>("loggedlist");
         emailTextField = root.Q<TextField>("EmailTextField");
         passwordTextField = root.Q<TextField>("PasswordTextField");
         button = root.Q<Button>("LoginButton");
+        nicknameButton = root.Q<Button>("validnicknamebutton");
         skipButton = root.Q<Button>("SkipButton");
         errorBox = root.Q<VisualElement>("ErrorBox");
         tab = root.Q<VisualElement>("TAB");
+        nicknameHolder = root.Q<VisualElement>("nicknameelementsholder");
         errorBoxLabel = root.Q<Label>("ErrorBoxLabel");
         loginBoxLabel = root.Q<Label>("logginboxlabel");
         frame = root.Q<VisualElement>("Frame");
@@ -69,20 +74,27 @@ public class UIManager : MonoBehaviourPunCallbacks
         newEmailTextField = root.Q<TextField>("NewEmailTextField");
         newPasswordTextField = root.Q<TextField>("NewPasswordTextField");
         confPasswordTextField = root.Q<TextField>("ConfPasswordTextField");
+        nicknameTextField = root.Q<TextField>("nicknametextfield");
 
         frame.pickingMode = PickingMode.Ignore;
 
-        button.RegisterCallback<ClickEvent>(evt => StartCoroutine(OnLoginButtonClicked(evt)));
-        registButton.RegisterCallback<ClickEvent>(evt => StartCoroutine(OnRegisterButtonClicked(evt)));
-        disconnectButton.RegisterCallback<ClickEvent>(networkManager.Disconnect);
-
-        skipButton.clicked += FramesAnimation;
+        button.RegisterCallback<ClickEvent>(evt => StartCoroutine(OnLoginButtonClicked()));
+        registButton.RegisterCallback<ClickEvent>(evt => StartCoroutine(OnRegisterButtonClicked()));
+        disconnectButton.RegisterCallback<ClickEvent>(evt => networkManager.Disconnect());
+        skipButton.RegisterCallback<ClickEvent>(evt => FramesAnimation());
+        nicknameButton.RegisterCallback<ClickEvent>(evt => ValidNickname());
 
         errorBox.AddToClassList("errorBoxUp");
         tab.RemoveFromClassList("tabOut");
     }
 
-    IEnumerator OnLoginButtonClicked(ClickEvent evt)
+    void ValidNickname()
+    {
+        networkManager.Connect();
+        nicknameHolder.AddToClassList("nicknameelementsholderhidden");
+    }
+
+    IEnumerator OnLoginButtonClicked()
     {
         errorBox.AddToClassList("errorBoxUp");
 
@@ -110,8 +122,8 @@ public class UIManager : MonoBehaviourPunCallbacks
                 break;
 
             case (true, true)://connected
-                networkManager.Connect();
                 tab.AddToClassList("tabOut");
+                nicknameHolder.RemoveFromClassList("nicknameelementsholderhidden");
                 break;
         }
        
@@ -120,11 +132,11 @@ public class UIManager : MonoBehaviourPunCallbacks
 
     bool IsEmailValid(string email)
     {
-        const string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov|fr)$";
+        const string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov|fr)$";//email template
         return Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
     }
 
-    IEnumerator OnRegisterButtonClicked(ClickEvent evt)
+    IEnumerator OnRegisterButtonClicked()
     {
         errorBox.AddToClassList("errorBoxUp");
 
@@ -200,7 +212,7 @@ public class UIManager : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void AddList()
+    public void AddList()
     {
         loggedCount.Add(loggedCount.Count);
 
@@ -211,8 +223,7 @@ public class UIManager : MonoBehaviourPunCallbacks
         list.bindItem = (root, i) =>
         {
             i += 1;
-            root.Q<Label>().text = i.ToString() + " Account Connected";
-            PhotonNetwork.LocalPlayer.NickName ="TEST";
+            root.Q<Label>().text = i.ToString() + " Account Connected ";
         };
         list.fixedItemHeight = 60;
         list.Rebuild();
