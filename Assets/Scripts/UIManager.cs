@@ -12,7 +12,6 @@ using Photon.Pun;
 public class UIManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] VisualTreeAsset elementList;
-    [SerializeField] UIDocument loggedMenu;
     [SerializeField] NetworkManager networkManager;
     ListView list;
     VisualElement root;
@@ -84,7 +83,7 @@ public class UIManager : MonoBehaviourPunCallbacks
 
         button.RegisterCallback<ClickEvent>(evt => StartCoroutine(OnLoginButtonClicked()));
         registButton.RegisterCallback<ClickEvent>(evt => StartCoroutine(OnRegisterButtonClicked()));
-        disconnectButton.RegisterCallback<ClickEvent>(evt => StartCoroutine(LogginStatusBox("Disconnected")));
+        disconnectButton.RegisterCallback<ClickEvent>(evt => networkManager.Disconnect());
         skipButton.RegisterCallback<ClickEvent>(evt => FramesAnimation());
         nicknameButton.RegisterCallback<ClickEvent>(evt => ConnectAndValidNickname());
 
@@ -228,7 +227,6 @@ public class UIManager : MonoBehaviourPunCallbacks
         if(text == "Disconnected")//if disconnet button is clicked
         {
             disconnectButton.RemoveFromClassList("disconnectbuttonup");//hide button
-            networkManager.Disconnect();
         }
 
         loginBoxLabel.text = text;
