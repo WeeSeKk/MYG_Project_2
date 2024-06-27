@@ -599,6 +599,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uIManager: {fileID: 1544338792}
+  playerPrefab: {fileID: 6654749680644103939, guid: 256bc017645b84b4abca861a5b6c0bc6,
+    type: 3}
 --- !u!1 &1544338789
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +668,6 @@ MonoBehaviour:
     type: 3}
   loggedMenu: {fileID: 1544338790}
   networkManager: {fileID: 1290665470}
-  loggedCount: 
 --- !u!114 &1544338793
 MonoBehaviour:
   m_ObjectHideFlags: 0

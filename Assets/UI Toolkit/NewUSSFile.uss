@@ -53,13 +53,17 @@ TextElement {
     -unity-text-align: upper-left;
     -unity-font-style: normal;
     -unity-slice-scale: 1.5px;
-    -unity-slice-top: 0;
     justify-content: flex-start;
     align-self: auto;
     align-items: stretch;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    -unity-background-scale-mode: stretch-to-fill;
 }
 
-.nicknameelementsholder{
+.nicknameelementsholder {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -67,7 +71,7 @@ TextElement {
     transition-duration: 0.5s;
 }
 
-.nicknameelementsholderhidden{
+.nicknameelementsholderhidden {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -75,7 +79,7 @@ TextElement {
     transition-duration: 0.5s;
 }
 
-.nicknamelabel{
+.nicknamelabel {
     position: absolute;
     align-self: center;
     width: 75%;
@@ -84,7 +88,7 @@ TextElement {
     font-size: 75px;
 }
 
-.nicknametextfield{
+.nicknametextfield {
     position: absolute;
     align-self: center;
     width: 75%;
@@ -94,7 +98,7 @@ TextElement {
     -unity-font-style: italic;
 }
 
-.validnicknamebutton{
+.validnicknamebutton {
     position: absolute;
     align-self: flex-end;
     width: 25%;
@@ -117,7 +121,7 @@ TextElement {
     scale: 1 1;
 }
 
-.validnicknamebutton:hover{
+.validnicknamebutton:hover {
     position: absolute;
     align-self: flex-end;
     width: 25%;
@@ -140,7 +144,7 @@ TextElement {
     scale: 1.1 1.1;
 }
 
-.validnicknamebutton:active{
+.validnicknamebutton:active {
     position: absolute;
     align-self: flex-end;
     width: 25%;
@@ -162,7 +166,6 @@ TextElement {
     text-shadow: 5px 5px 0 rgb(0, 0, 0);
     scale: 1 1;
 }
-
 
 .loginButton {
     position: absolute;
@@ -385,16 +388,16 @@ TextElement {
     right: 200%;
 }
 
-.connectionlist { 
+.connectionlist {
     position: absolute;
     display: flex;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000;
+    background-color: rgb(0, 0, 0);
 }
 
 .loggedlist {
@@ -403,14 +406,14 @@ TextElement {
     height: 100%;
 }
 
-.disconnectbutton{
+.disconnectbutton {
     position: absolute;
     align-self: center;
     background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Alternative_Colors_3.png?fileID=-1296462821805125758&guid=0bfe7a2d4a8de314bbf0f670d78a6cd2&type=3#Steampunk_UI_Alternative_Colors_3_0");
     font-size: 50px;
     display: flex;
-    background-color: rgba(255,255,255,0);
-    border-color: rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
     width: 40%;
     height: 5%;
     bottom: -6%;
@@ -427,17 +430,17 @@ TextElement {
     text-shadow: 5px 5px 0 rgb(0, 0, 0);
 }
 
-.disconnectbuttonup{
+.disconnectbuttonup {
     position: absolute;
     align-self: center;
     background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Alternative_Colors_3.png?fileID=-1296462821805125758&guid=0bfe7a2d4a8de314bbf0f670d78a6cd2&type=3#Steampunk_UI_Alternative_Colors_3_0");
     font-size: 50px;
     display: flex;
-    background-color: rgba(255,255,255,0);
-    border-color: rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
     width: 40%;
     height: 5%;
-    bottom: 0%;
+    bottom: 0;
     transition-duration: 0.5s;
     color: rgb(139, 95, 49);
     -unity-font-style: bold;
@@ -451,17 +454,17 @@ TextElement {
     text-shadow: 5px 5px 0 rgb(0, 0, 0);
 }
 
-.disconnectbutton:hover{
+.disconnectbutton:hover {
     position: absolute;
     align-self: center;
     background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Alternative_Colors_3.png?fileID=-1296462821805125758&guid=0bfe7a2d4a8de314bbf0f670d78a6cd2&type=3#Steampunk_UI_Alternative_Colors_3_0");
     font-size: 50px;
     display: flex;
-    background-color: rgba(255,255,255,0);
-    border-color: rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
     width: 40%;
     height: 5%;
-    bottom: 0%;
+    bottom: 0;
     scale: 1.1 1.1;
     transition-duration: 0.5s;
     color: rgb(139, 95, 49);
@@ -476,43 +479,43 @@ TextElement {
     text-shadow: 5px 5px 0 rgb(0, 0, 0);
 }
 
-.disconnectbutton:active{
+.disconnectbutton:active {
     position: absolute;
     align-self: center;
     background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Alternative_Colors_3.png?fileID=-1296462821805125758&guid=0bfe7a2d4a8de314bbf0f670d78a6cd2&type=3#Steampunk_UI_Alternative_Colors_3_0");
     font-size: 50px;
     display: flex;
-    background-color: rgba(255,255,255,0);
-    border-color: rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
     width: 40%;
     height: 5%;
-    bottom: 0%;
+    bottom: 0;
     scale: 1 1;
 }
 
-.logginbox{
+.logginbox {
     position: absolute;
     display: flex;
-    left:13%;
-    right: 0%;
+    left: 13%;
+    right: 0;
     top: -15%;
-    bottom: 0%;
+    bottom: 0;
     width: 75%;
     height: 15%;
 }
 
-.logginboxdown{ 
+.logginboxdown {
     position: absolute;
     display: flex;
-    left:13%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
+    left: 13%;
+    right: 0;
+    top: 0;
+    bottom: 0;
     width: 75%;
     height: 15%;
 }
 
-.logginboxlabel{
+.logginboxlabel {
     align-self: center;
     bottom: -40%;
 }
@@ -582,4 +585,56 @@ TextElement {
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 0;
+}
+
+.unity-progress-bar__title-container {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-image: url("project://database/Assets/Gentleland/SteampunkUI/Art/Steampunk_UI_Loading_Bars.png?fileID=-8688575788626425756&guid=58d0e5bc2dd28434abcaaf94a4dfeec0&type=3#Steampunk_UI_Loading_Bars_6");
+    border-top-width: 28px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.unity-progress-bar__background {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-image: none;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 24px;
+    border-bottom-left-radius: 22px;
+    border-top-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.unity-progress-bar__progress {
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 5px;
+    border-right-width: 9px;
+    border-bottom-width: -5px;
+    border-left-width: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.unity-progress-bar__container {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-image: none;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.unity-progress-bar__title {
+    background-color: rgba(0, 0, 0, 0);
 }

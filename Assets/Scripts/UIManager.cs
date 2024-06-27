@@ -14,10 +14,11 @@ public class UIManager : MonoBehaviourPunCallbacks
     [SerializeField] VisualTreeAsset elementList;
     [SerializeField] UIDocument loggedMenu;
     [SerializeField] NetworkManager networkManager;
-    public ListView list;
+    ListView list;
     VisualElement root;
     VisualElement loginBox;
     VisualElement nicknameHolder;
+    VisualElement progressBarProgress;
     VisualElement tab;
     VisualElement gear0;
     VisualElement gear1;
@@ -26,6 +27,7 @@ public class UIManager : MonoBehaviourPunCallbacks
     VisualElement transitionFrame;
     VisualElement loginFrame;
     VisualElement frame;
+    ProgressBar progressBar;
     VisualElement errorBox;
     TextField passwordTextField;
     TextField newPasswordTextField;
@@ -42,12 +44,12 @@ public class UIManager : MonoBehaviourPunCallbacks
     Label loginBoxLabel;
     List<string> emails;
     List<string> passwords;
-    public List<int> loggedCount = new List<int>();
+    List<string> usernames = new List<string>();
     
     void Start()
     {
-        emails = new List<string> {"admin"};
-        passwords = new List<string> {"admin"};
+        emails = new List<string> {"admin"};//setup admin a valid email for debug
+        passwords = new List<string> {"admin"};//setup admin a valid password for debug
 
         root = GetComponent<UIDocument>().rootVisualElement;
         list = root.Q<ListView>("loggedlist");
@@ -75,26 +77,49 @@ public class UIManager : MonoBehaviourPunCallbacks
         newPasswordTextField = root.Q<TextField>("NewPasswordTextField");
         confPasswordTextField = root.Q<TextField>("ConfPasswordTextField");
         nicknameTextField = root.Q<TextField>("nicknametextfield");
+        progressBar = root.Q<ProgressBar>("ProgressBar");
+        progressBarProgress = root.Q<VisualElement>("", "unity-progress-bar__progress");
 
-        frame.pickingMode = PickingMode.Ignore;
+        frame.pickingMode = PickingMode.Ignore;//ignore pickingmod for a visual element placed in front of the buttons and textfields so they are selectable
 
         button.RegisterCallback<ClickEvent>(evt => StartCoroutine(OnLoginButtonClicked()));
         registButton.RegisterCallback<ClickEvent>(evt => StartCoroutine(OnRegisterButtonClicked()));
-        disconnectButton.RegisterCallback<ClickEvent>(evt => networkManager.Disconnect());
+        disconnectButton.RegisterCallback<ClickEvent>(evt => StartCoroutine(LogginStatusBox("Disconnected")));
         skipButton.RegisterCallback<ClickEvent>(evt => FramesAnimation());
-        nicknameButton.RegisterCallback<ClickEvent>(evt => ValidNickname());
+        nicknameButton.RegisterCallback<ClickEvent>(evt => ConnectAndValidNickname());
 
-        errorBox.AddToClassList("errorBoxUp");
-        tab.RemoveFromClassList("tabOut");
+        newPasswordTextField.RegisterValueChangedCallback(evt => ProgressBarUpdate());
+
+        errorBox.AddToClassList("errorBoxUp");//setup error box 
+        tab.RemoveFromClassList("tabOut");//setup tab
     }
 
-    void ValidNickname()
+    void ConnectAndValidNickname()//call the fonction to save the nickname and the on to connect to photon
     {
         networkManager.Connect();
+        NetworkManager.SaveNickname(nicknameTextField.text);
         nicknameHolder.AddToClassList("nicknameelementsholderhidden");
     }
 
-    IEnumerator OnLoginButtonClicked()
+    void ProgressBarUpdate()//update the new password progress bar
+    {
+        if(progressBar.value < 2)//if value is 0/2 color red
+        {
+            progressBarProgress.style.backgroundColor = Color.red;
+        }
+        else if (progressBar.value > 2 && progressBar.value < 5)//if value is 2/5 color yellow
+        {
+            progressBarProgress.style.backgroundColor = Color.yellow;
+        }
+        else if (progressBar.value >= 5)//if value is 6 color green
+        {
+            progressBarProgress.style.backgroundColor = Color.green;
+        }
+
+        progressBar.value = newPasswordTextField.value.Length; 
+    }
+
+    IEnumerator OnLoginButtonClicked()//verify every case on the login tab
     {
         errorBox.AddToClassList("errorBoxUp");
 
@@ -121,7 +146,7 @@ public class UIManager : MonoBehaviourPunCallbacks
                 yield return new WaitForSeconds(2f);
                 break;
 
-            case (true, true)://connected
+            case (true, true)://Logged in 
                 tab.AddToClassList("tabOut");
                 nicknameHolder.RemoveFromClassList("nicknameelementsholderhidden");
                 break;
@@ -130,13 +155,13 @@ public class UIManager : MonoBehaviourPunCallbacks
         errorBox.AddToClassList("errorBoxUp");
     }
 
-    bool IsEmailValid(string email)
+    bool IsEmailValid(string email)//verify is the email is in a valid format
     {
         const string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov|fr)$";//email template
         return Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
     }
 
-    IEnumerator OnRegisterButtonClicked()
+    IEnumerator OnRegisterButtonClicked()//verify every case on the register tab
     {
         errorBox.AddToClassList("errorBoxUp");
 
@@ -186,7 +211,7 @@ public class UIManager : MonoBehaviourPunCallbacks
         errorBox.AddToClassList("errorBoxUp");
     }
 
-    void FramesAnimation()
+    void FramesAnimation()//annimate the ui to go from the register tab to the login tab
     {   
         registFrame.AddToClassList("registerWoodFrameHidden");
         transitionFrame.AddToClassList("transitionWoodFrameHidden");
@@ -196,13 +221,14 @@ public class UIManager : MonoBehaviourPunCallbacks
         loginFrame.RemoveFromClassList("loginWoodFramHidden");
     }
 
-    public IEnumerator LogginStatusBox(string text)
+    public IEnumerator LogginStatusBox(string text)//show up the disconnect button once connected to photon or hide the button if pressed once connected
     {
         disconnectButton.AddToClassList("disconnectbuttonup");
 
-        if(text == "Disconnected")
+        if(text == "Disconnected")//if disconnet button is clicked
         {
-            disconnectButton.RemoveFromClassList("disconnectbuttonup");
+            disconnectButton.RemoveFromClassList("disconnectbuttonup");//hide button
+            networkManager.Disconnect();
         }
 
         loginBoxLabel.text = text;
@@ -211,26 +237,33 @@ public class UIManager : MonoBehaviourPunCallbacks
         loginBox.RemoveFromClassList("logginboxdown");
     }
 
-    [PunRPC]
-    public void AddList()
+  [PunRPC]
+    public void AddList(string username)//add the username to the list 
     {
-        loggedCount.Add(loggedCount.Count);
-
-        list.Clear();
-
-        list.makeItem = () =>  elementList.CloneTree();
-        list.itemsSource = loggedCount;
-        list.bindItem = (root, i) =>
+        if (!usernames.Contains(username))
         {
-            i += 1;
-            root.Q<Label>().text = i.ToString() + " Account Connected ";
+            usernames.Add(username);
+        }
+
+        UpdateList();
+    }
+
+    private void UpdateList()//update the list to add new username 
+    {
+        list.Clear();
+        list.itemsSource = usernames;
+        list.makeItem = () => elementList.CloneTree();
+        list.bindItem = (element, index) =>
+        {
+            var label = element.Q<Label>();
+            label.text = $"{index + 1}. Account Connected: {usernames[index]}";//display username and number based on index in the list
         };
         list.fixedItemHeight = 60;
         list.Rebuild();
     }
 
-    public override void OnJoinedRoom()
+    public void SetupList(string username)//call all connected player and buffer for every new player connecting
     {
-        photonView.RPC("AddList", RpcTarget.All);
+        photonView.RPC("AddList", RpcTarget.AllBuffered, username);//calling addlist
     }
 }

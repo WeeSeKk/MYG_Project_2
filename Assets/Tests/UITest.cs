@@ -20,88 +20,69 @@ public class UITest
     }
 
     [UnityTest]
-    public IEnumerator PasswordAndEmailErrorLabel()
+    public IEnumerator RegisterSuccess()
     {
         SceneManager.LoadScene(0);
         yield return null;
-
         GameObject go = GameObject.Find("UIDocument");
         UIDocument uIDocument = go.GetComponent<UIDocument>();
-        Label label = uIDocument.rootVisualElement.Q<Label>("ErrorBoxLabel");
-        Button button = uIDocument.rootVisualElement.Q<Button>("LoginButton");
+        VisualElement registFrame = uIDocument.rootVisualElement.Q<VisualElement>("RegisterWoodFrame");
+        Button registButton = uIDocument.rootVisualElement.Q<Button>("RegistButton");
+        TextField newEmailTextField = uIDocument.rootVisualElement.Q<TextField>("NewEmailTextField");
+        TextField newPasswordTextField = uIDocument.rootVisualElement.Q<TextField>("NewPasswordTextField");
+        TextField confPasswordTextField = uIDocument.rootVisualElement.Q<TextField>("ConfPasswordTextField");
 
-        using (var clicked = new NavigationSubmitEvent {target = button})
-            button.SendEvent(clicked);
+        newEmailTextField.value = "WeeSeK@hotmail.fr";
+        newPasswordTextField.value = "azerty";
+        confPasswordTextField.value = "azerty";
 
-        Assert.IsTrue(label.text == "password & email invalid");
+        using (var clicked = new NavigationSubmitEvent {target = registButton})
+            registButton.SendEvent(clicked);
+
+        Assert.IsNotNull(registFrame.ClassListContains("registerWoodFrameHidden"));
     }
 
     [UnityTest]
-    public IEnumerator EmailErrorLabel()
+    public IEnumerator LoginSuccess()
     {
         SceneManager.LoadScene(0);
         yield return null;
-
         GameObject go = GameObject.Find("UIDocument");
         UIDocument uIDocument = go.GetComponent<UIDocument>();
-        Label label = uIDocument.rootVisualElement.Q<Label>("ErrorBoxLabel");
-        Button button = uIDocument.rootVisualElement.Q<Button>("LoginButton");
+        VisualElement loginFrame = uIDocument.rootVisualElement.Q<VisualElement>("LoginWoodFrame");
+        Button loginButton = uIDocument.rootVisualElement.Q<Button>("LoginButton");
         TextField emailTextField = uIDocument.rootVisualElement.Q<TextField>("EmailTextField");
         TextField passwordTextField = uIDocument.rootVisualElement.Q<TextField>("PasswordTextField");
-
-        emailTextField.value = "1234";
-        passwordTextField.value = "admin";
         
 
-        using (var clicked = new NavigationSubmitEvent {target = button})
-            button.SendEvent(clicked);
+        emailTextField.value = "WeeSeK@hotmail.fr";
+        passwordTextField.value = "azerty";
 
-        Assert.IsTrue(label.text == "email invalid");
+        using (var clicked = new NavigationSubmitEvent {target = loginButton})
+            loginButton.SendEvent(clicked);
+
+        Assert.IsNotNull(!loginFrame.ClassListContains("loginWoodFramHidden"));
     }
 
     [UnityTest]
-    public IEnumerator PasswordErrorLabel()
+    public IEnumerator Connected()
     {
         SceneManager.LoadScene(0);
         yield return null;
-
         GameObject go = GameObject.Find("UIDocument");
         UIDocument uIDocument = go.GetComponent<UIDocument>();
-        Label label = uIDocument.rootVisualElement.Q<Label>("ErrorBoxLabel");
-        Button button = uIDocument.rootVisualElement.Q<Button>("LoginButton");
-        TextField emailTextField = uIDocument.rootVisualElement.Q<TextField>("EmailTextField");
-        TextField passwordTextField = uIDocument.rootVisualElement.Q<TextField>("PasswordTextField");
+        VisualElement loginFrame = uIDocument.rootVisualElement.Q<VisualElement>("LoginWoodFrame");
+        Button nicknameButton = uIDocument.rootVisualElement.Q<Button>("validnicknamebutton");
+        TextField nicknameTextField = uIDocument.rootVisualElement.Q<TextField>("nicknametextfield");
+        Label loginBoxLabel = uIDocument.rootVisualElement.Q<Label>("logginboxlabel");
+        
+        nicknameTextField.value = "WeeSeK";
 
-        emailTextField.value = "admin";
-        passwordTextField.value = "1234";
+        using (var clicked = new NavigationSubmitEvent {target = nicknameButton})
+            nicknameButton.SendEvent(clicked);
+            yield return new WaitForSeconds(2f);
         
 
-        using (var clicked = new NavigationSubmitEvent {target = button})
-            button.SendEvent(clicked);
-            
-        Assert.IsTrue(label.text == "password invalid");
-    }
-
-    [UnityTest]
-    public IEnumerator LoginLabel()
-    {
-        SceneManager.LoadScene(0);
-        yield return null;
-
-        GameObject go = GameObject.Find("UIDocument");
-        UIDocument uIDocument = go.GetComponent<UIDocument>();
-        Label label = uIDocument.rootVisualElement.Q<Label>("ErrorBoxLabel");
-        Button button = uIDocument.rootVisualElement.Q<Button>("LoginButton");
-        TextField emailTextField = uIDocument.rootVisualElement.Q<TextField>("EmailTextField");
-        TextField passwordTextField = uIDocument.rootVisualElement.Q<TextField>("PasswordTextField");
-
-        emailTextField.value = "admin";
-        passwordTextField.value = "admin";
-        
-
-        using (var clicked = new NavigationSubmitEvent {target = button})
-            button.SendEvent(clicked);
-
-        Assert.IsTrue(label.text == "Label");
+        Assert.IsNotNull(loginBoxLabel.text = "Connected");
     }
 }
