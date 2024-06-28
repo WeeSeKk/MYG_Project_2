@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] VisualTreeAsset elementList;
     [SerializeField] NetworkManager networkManager;
+    [SerializeField] SaveData saveData;
     ListView list;
     VisualElement root;
     VisualElement loginBox;
@@ -79,7 +80,7 @@ public class UIManager : MonoBehaviourPunCallbacks
         progressBar = root.Q<ProgressBar>("ProgressBar");
         progressBarProgress = root.Q<VisualElement>("", "unity-progress-bar__progress");
 
-        frame.pickingMode = PickingMode.Ignore;//ignore pickingmod for a visual element placed in front of the buttons and textfields so they are selectable
+        frame.pickingMode = PickingMode.Ignore;//ignore pickingmode for a visual element placed in front of the buttons and textfields so they are selectable
 
         button.RegisterCallback<ClickEvent>(evt => StartCoroutine(OnLoginButtonClicked()));
         registButton.RegisterCallback<ClickEvent>(evt => StartCoroutine(OnRegisterButtonClicked()));
@@ -122,8 +123,8 @@ public class UIManager : MonoBehaviourPunCallbacks
     {
         errorBox.AddToClassList("errorBoxUp");
 
-        bool emailValid = emails.Contains(emailTextField.text);
-        bool passwordValid = passwords.Contains(passwordTextField.text);
+        bool emailValid = IsUserExist(emailTextField.text, passwordTextField.text ,1);
+        bool passwordValid = IsUserExist(emailTextField.text, passwordTextField.text ,2);
 
         switch (emailValid, passwordValid)
         {
@@ -201,13 +202,46 @@ public class UIManager : MonoBehaviourPunCallbacks
                 break;
 
             case (true, true, true)://if register success
+
                 emails.Add(newEmailTextField.text);
                 passwords.Add(newPasswordTextField.text);
-                FramesAnimation();
+
+                if(IsUserExist(newEmailTextField.text, newPasswordTextField.text, 1) == false)
+                {
+                    LoginInfos newUser = new LoginInfos();//Creation of a new user with an email and a password
+                    newUser.emails = newEmailTextField.text;
+                    newUser.passwords = newPasswordTextField.text;
+                    saveData.data.datas.Add(newUser);//Add user to the list 
+                    saveData.SaveToJson();//save the list in Json
+                }
+                else
+                {
+                    errorBoxLabel.text = "emails already used";
+                    errorBox.RemoveFromClassList("errorBoxUp");
+                    yield return new WaitForSeconds(2f);
+                    break;
+                }
+                FramesAnimation();//Launch animations to go to the login tab
                 break;
         }
        
         errorBox.AddToClassList("errorBoxUp");
+    }
+
+    private bool IsUserExist(string email, string password ,int number)//verify that the email use to register is not already used
+    {
+        foreach (LoginInfos user in saveData.data.datas)
+        {
+            if(user.emails == email && number == 1)
+            {
+                return true;
+            }
+             if(user.passwords == password && number == 2)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void FramesAnimation()//annimate the ui to go from the register tab to the login tab
@@ -262,6 +296,6 @@ public class UIManager : MonoBehaviourPunCallbacks
 
     public void SetupList(string username)//call all connected player and buffer for every new player connecting
     {
-        photonView.RPC("AddList", RpcTarget.AllBuffered, username);//calling addlist
+        photonView.RPC("AddList", RpcTarget.AllBuffered, username);
     }
 }
