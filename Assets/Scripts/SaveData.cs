@@ -5,7 +5,7 @@ using UnityEngine;
 public class SaveData : MonoBehaviour
 {
     public Data data = new Data(); 
-
+    
     public void SaveToJson()//Create a json file in the persistent data folder
     {
         string datastring = JsonUtility.ToJson(data);

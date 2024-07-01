@@ -42,15 +42,10 @@ public class UIManager : MonoBehaviourPunCallbacks
     Button registButton;
     Label errorBoxLabel;
     Label loginBoxLabel;
-    List<string> emails;
-    List<string> passwords;
     List<string> usernames = new List<string>();
     
     void Start()
     {
-        emails = new List<string> {"admin"};//setup admin a valid email for debug
-        passwords = new List<string> {"admin"};//setup admin a valid password for debug
-
         root = GetComponent<UIDocument>().rootVisualElement;
         list = root.Q<ListView>("loggedlist");
         emailTextField = root.Q<TextField>("EmailTextField");
@@ -203,9 +198,6 @@ public class UIManager : MonoBehaviourPunCallbacks
 
             case (true, true, true)://if register success
 
-                emails.Add(newEmailTextField.text);
-                passwords.Add(newPasswordTextField.text);
-
                 if(IsUserExist(newEmailTextField.text, newPasswordTextField.text, 1) == false)
                 {
                     LoginInfos newUser = new LoginInfos();//Creation of a new user with an email and a password
@@ -228,7 +220,7 @@ public class UIManager : MonoBehaviourPunCallbacks
         errorBox.AddToClassList("errorBoxUp");
     }
 
-    private bool IsUserExist(string email, string password ,int number)//verify that the email use to register is not already used
+    private bool IsUserExist(string email, string password ,int number)//verify that the email used to register is not already used
     {
         foreach (LoginInfos user in saveData.data.datas)
         {
